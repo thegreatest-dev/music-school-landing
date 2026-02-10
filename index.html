@@ -3,1075 +3,827 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music School</title>
-    <!-- Icons for footer contact/social links -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Minstrel David Royal School of Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ══ TOKENS & RESET ══ */
+        :root {
+            --maroon:   #55193b;
+            --maroon-d: #3a0f28;
+            --gold:     #c4973e;
+            --gold-l:   #e0b96a;
+            --cream:    #faf6f0;
+            --cream-d:  #f0e9df;
+            --ink:      #1a1118;
+            --ink-m:    #4a3a42;
+            --ink-l:    #7a6a72;
+            --white:    #ffffff;
         }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; }
+        img { display: block; max-width: 100%; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            background: linear-gradient(rgba(255,255,255,0.91), rgba(255,255,255,0.91)), url('images/bg.jpg') center/cover fixed no-repeat;
-        }
-
-        /* Header Styles */
+        /* ══ HEADER ══ */
         header {
-            background: #fff;
-            padding: 1rem 5%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
+            position: fixed; inset: 0 0 auto 0; z-index: 1000;
+            background: rgba(250,246,240,0.92);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(196,151,62,0.15);
+            transition: all 0.35s ease;
         }
-
         header.scrolled {
-            padding: 0.5rem 5%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            background: rgba(250,246,240,0.98);
+            border-bottom-color: rgba(196,151,62,0.3);
+            box-shadow: 0 4px 30px rgba(26,17,24,0.08);
         }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+        .header-inner {
+            max-width: 1360px; margin: 0 auto; padding: 0 3rem;
+            height: 80px; display: flex; align-items: center;
+            justify-content: space-between; gap: 2rem;
         }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-placeholder {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #7851a9 0%, #4b2c82 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        /* use real logo image */
-        .logo-placeholder { display: none; }
+        .logo-section { display: flex; align-items: center; gap: 1rem; text-decoration: none; flex-shrink: 0; }
         .logo-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+            border: 2px solid rgba(196,151,62,0.4);
+            transition: border-color 0.3s, transform 0.3s;
         }
-
-        .logo-image:hover {
-            transform: scale(1.05);
-        }
-
-        .school-name {
-            display: flex;
-            flex-direction: column;
-        }
-
+        .logo-section:hover .logo-image { border-color: var(--gold); transform: rotate(-3deg) scale(1.05); }
         .school-name h1 {
-            font-size: 1.5rem;
-            color: #2d1b4e;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; font-weight: 600; color: var(--maroon);
+            letter-spacing: 0.03em; line-height: 1.2;
         }
+        .school-name p { font-size: 0.67rem; color: var(--ink-l); font-weight: 300; letter-spacing: 0.06em; text-transform: uppercase; }
 
-        .school-name p {
-            font-size: 0.8rem;
-            color: #666;
-            font-weight: 300;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
+        nav ul { display: flex; list-style: none; gap: 0.2rem; }
         nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
+            display: inline-block; padding: 0.45rem 0.9rem;
+            text-decoration: none; color: var(--ink-m);
+            font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+            text-transform: uppercase; border-radius: 4px;
+            transition: color 0.25s, background 0.25s;
         }
+        nav a:hover { color: var(--maroon); background: rgba(85,25,59,0.06); }
+        .nav-cta { background: var(--maroon) !important; color: var(--white) !important; }
+        .nav-cta:hover { background: var(--maroon-d) !important; }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #7851a9; 
-            transition: width 0.3s ease;
-        }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--maroon); transition: all 0.3s; transform-origin: center; }
+        .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        nav a:hover {
-            color: #7851a9; 
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #2d1b4e;
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
+        /* ══ HERO ══ */
         .hero {
-            margin-top: 90px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.04) 0%, rgba(118,75,162,0.03) 100%);
-            padding: 5rem 0 3rem;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            min-height: 100svh; padding-top: 80px;
+            position: relative; display: flex; align-items: center;
+            overflow: hidden; background: var(--cream);
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('images/hero-watermark.png');
-            background-position: center;
-            background-size: cover;
-            opacity: 0.04;
-            pointer-events: none;
-            will-change: transform;
-            transform: translate3d(0, var(--hero-parallax, 0px), 0);
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 60% at 65% 40%, rgba(196,151,62,0.09) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 5% 85%, rgba(85,25,59,0.06) 0%, transparent 60%);
         }
+        /* Staff lines */
+        .hero-staff { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 55%; height: 70%; pointer-events: none; opacity: 0.035; }
+        .hero-staff-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--maroon); }
 
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 4rem;
-        }
+        /* Video bg */
+        .hero-video-wrap { position: absolute; inset: 0; z-index: 0; display: none; }
+        .hero-video { width: 100%; height: 100%; object-fit: cover; }
+        .hero-video-overlay { position: absolute; inset: 0; background: rgba(26,17,24,0.58); }
 
-        .hero-content {
-            text-align: left;
-            margin-bottom: 3rem;
-            max-width: 1100px;
-            padding-left: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        .hero-inner {
+            position: relative; z-index: 1;
+            max-width: 1360px; margin: 0 auto; padding: 5rem 3rem 4rem;
+            width: 100%; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 5rem; align-items: center;
         }
+        .hero-copy { max-width: 580px; }
 
-        .hero-subtitle {
-            font-size: 1rem;
-            color: #7b3a63;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            text-transform: none;
-            letter-spacing: 1px;
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 1.2rem;
+            opacity: 0; animation: riseIn 0.7s cubic-bezier(.16,1,.3,1) forwards 0.2s;
         }
+        .eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
 
         .hero-title {
-            font-size: clamp(36px, 8vw, 88px);
-            color: #55193b;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.02;
-            text-align: left;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(44px, 6.5vw, 88px);
+            font-weight: 300; line-height: 1.0; color: var(--ink);
+            margin-bottom: 1.4rem; letter-spacing: -0.01em;
+            opacity: 0; animation: riseIn 0.8s cubic-bezier(.16,1,.3,1) forwards 0.35s;
+        }
+        .hero-title strong { font-weight: 600; font-style: italic; color: var(--maroon); }
+
+        .hero-desc {
+            font-size: 0.93rem; line-height: 1.8; color: var(--ink-m);
+            max-width: 440px; margin-bottom: 2.5rem; font-weight: 300;
+            opacity: 0; animation: riseIn 0.8s cubic-bezier(.16,1,.3,1) forwards 0.5s;
         }
 
-        .hero-departments {
-            font-size: 1rem;
-            color: #6b2a4a;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .hero-actions {
+            display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap;
+            opacity: 0; animation: riseIn 0.8s cubic-bezier(.16,1,.3,1) forwards 0.65s;
         }
 
-        .department {
-            position: relative;
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            background: var(--maroon); color: var(--white); text-decoration: none;
+            padding: 0.85rem 1.9rem; border-radius: 4px;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            box-shadow: 0 6px 24px rgba(85,25,59,0.28);
+        }
+        .btn-primary:hover { background: var(--maroon-d); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(85,25,59,0.36); }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            color: var(--maroon); text-decoration: none;
+            padding: 0.85rem 1.5rem; border-radius: 4px;
+            border: 1.5px solid rgba(85,25,59,0.28);
+            font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em;
+            transition: background 0.25s, border-color 0.25s, transform 0.25s;
+        }
+        .btn-ghost:hover { background: rgba(85,25,59,0.05); border-color: var(--maroon); transform: translateY(-2px); }
+
+        .hero-tags {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.8rem;
+            opacity: 0; animation: riseIn 0.8s cubic-bezier(.16,1,.3,1) forwards 0.8s;
+        }
+        .tag {
+            display: inline-flex; align-items: center; gap: 0.38rem;
+            font-size: 0.72rem; font-weight: 500; color: var(--ink-m);
+            background: var(--white); border: 1px solid rgba(26,17,24,0.1);
+            padding: 0.36rem 0.85rem; border-radius: 999px; cursor: default;
+            transition: all 0.25s; box-shadow: 0 2px 8px rgba(26,17,24,0.05);
+        }
+        .tag::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+        .tag:hover { background: var(--maroon); color: var(--white); border-color: var(--maroon); transform: translateY(-2px); }
+        .tag:hover::before { background: rgba(255,255,255,0.5); }
+
+        /* Hero cards */
+        .hero-cards {
+            display: grid; grid-template-rows: auto auto; gap: 1.2rem;
+            opacity: 0; animation: riseIn 0.9s cubic-bezier(.16,1,.3,1) forwards 0.5s;
+        }
+        .hcard { position: relative; border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 8px 40px rgba(26,17,24,0.12); }
+        .hcard-main { height: 300px; }
+        .hcard-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .hcard-row .hcard { height: 158px; }
+
+        .hcard-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(.16,1,.3,1); }
+        .hcard:hover .hcard-bg { transform: scale(1.07); }
+
+        .hcard-main .hcard-bg {
+            background-color: #2d1434;
+            background-image: linear-gradient(160deg, rgba(85,25,59,0.62) 0%, rgba(20,10,20,0.72) 100%), url('images/individual.jpg');
+        }
+        .hcard-row .hcard:nth-child(1) .hcard-bg {
+            background-color: #1e1432;
+            background-image: linear-gradient(160deg, rgba(45,27,78,0.68) 0%, rgba(20,10,20,0.78) 100%), url('images/group.jpg');
         }
 
-        .department:not(:last-child)::after {
-            content: '|';
-            margin-left: 1rem;
-            color: #7851a9; /* royal purple separator */
+        .hcard-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(26,17,24,0.88) 0%, transparent 55%);
+            padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end;
         }
+        .hcard-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-l); margin-bottom: 0.3rem; }
+        .hcard-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2.5vw, 26px); font-weight: 600; color: var(--white); line-height: 1.2; }
 
-        /* initial state for hero cards */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-            align-items: stretch;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-            transition-delay: 0.1s;
+        .hcard-panel {
+            position: absolute; inset: 0; background: rgba(26,17,24,0.97);
+            padding: 2rem; display: flex; flex-direction: column; justify-content: center;
+            transform: translateY(100%); transition: transform 0.45s cubic-bezier(.16,1,.3,1);
         }
+        .hcard-main:hover .hcard-panel { transform: translateY(0); }
+        .hcard-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; color: var(--white); margin-bottom: 0.75rem; }
+        .hcard-panel p { font-size: 0.86rem; line-height: 1.75; color: rgba(255,255,255,0.68); }
 
-        .hero.in-view .hero-content,
-        .hero.in-view .cards-grid {
-            opacity: 1;
-            transform: translateY(0);
+        .hcard-apply {
+            background: var(--maroon); display: flex; align-items: center;
+            justify-content: space-between; padding: 1.5rem;
+            transition: background 0.25s, transform 0.25s; text-decoration: none;
         }
-
-        .card {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 350px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .hcard-apply:hover { background: var(--maroon-d); transform: scale(1.01); }
+        .hcard-apply span { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--white); }
+        .hcard-apply-icon {
+            width: 42px; height: 42px; border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-size: 0.82rem;
+            transition: background 0.25s;
         }
+        .hcard-apply:hover .hcard-apply-icon { background: rgba(255,255,255,0.15); }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        /* Mobile carousel */
+        .hero-cards-track { display: flex; overflow: hidden; }
+        .carousel-dots { display: none; justify-content: center; gap: 8px; margin-top: 1.4rem; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: rgba(85,25,59,0.2); cursor: pointer; transition: all 0.3s; }
+        .carousel-dot.active { background: var(--maroon); transform: scale(1.35); }
+
+        /* ══ STATS BAR ══ */
+        .stats-bar { background: var(--maroon); padding: 2.5rem 0; }
+        .stats-inner {
+            max-width: 1360px; margin: 0 auto; padding: 0 3rem;
+            display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center;
         }
+        .stat-item { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .stat-item.vis { opacity: 1; transform: translateY(0); }
+        .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+        .stat-num span { color: var(--gold-l); }
+        .stat-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
-        .card-image {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
+        /* ══ ABOUT ══ */
+        .about { padding: 7rem 0; background: var(--white); }
+        .about-inner { max-width: 1360px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+
+        .about-img-col { position: relative; opacity: 0; transform: translateX(-30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .about-img-col.vis { opacity: 1; transform: translateX(0); }
+        .about-img-frame {
+            width: 100%; padding-bottom: 100%; border-radius: 20px;
+            background: var(--cream-d) url('images/Logo1.png') center/60% no-repeat;
+            box-shadow: 0 20px 60px rgba(26,17,24,0.18); position: relative;
         }
-
-        .card:hover .card-image {
-            transform: scale(1.1);
+        .about-img-frame::before {
+            content: ''; position: absolute; inset: -12px -12px auto auto;
+            width: 52%; height: 52%;
+            border-top: 2px solid var(--gold); border-right: 2px solid var(--gold);
+            border-radius: 0 20px 0 0; pointer-events: none;
         }
-
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(21,10,28,0.72), rgba(21,10,28,0.2));
-            padding: 2.5rem 2rem;
-            color: white;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
+        .about-img-frame::after {
+            content: ''; position: absolute; inset: auto auto -12px -12px;
+            width: 42%; height: 42%;
+            border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold);
+            border-radius: 0 0 0 20px; pointer-events: none;
         }
-
-        .card-title {
-            font-size: clamp(20px, 3.2vw, 32px);
-            font-weight: 700;
-            margin: 0;
-            text-shadow: 0 4px 14px rgba(0,0,0,0.45);
-            padding-left: 0.25rem;
+        .about-badge {
+            position: absolute; bottom: -1.5rem; right: -1.5rem;
+            width: 108px; height: 108px; background: var(--maroon); border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; box-shadow: 0 8px 24px rgba(85,25,59,0.35);
+            border: 4px solid var(--white); z-index: 2;
         }
+        .about-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; }
+        .about-badge-txt { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.65); line-height: 1.3; max-width: 68px; }
 
-        .card-individual .card-panel,
-        .card-group .card-panel {
-            position: absolute;
-            inset: 0;
-            background: rgba(21,10,28,0.99);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 2.25rem 2.5rem;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-            z-index: 2;
+        .about-txt-col { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s; }
+        .about-txt-col.vis { opacity: 1; transform: translateY(0); }
+
+        .sec-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
         }
+        .sec-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); }
 
-        .card-individual:hover .card-panel,
-        .card-group:hover .card-panel {
-            transform: translateY(0);
+        .sec-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(30px, 4vw, 50px); font-weight: 300; line-height: 1.1;
+            color: var(--ink); margin-bottom: 1.4rem; letter-spacing: -0.01em;
         }
+        .sec-title em { font-style: italic; color: var(--maroon); font-weight: 600; }
 
-        .card-panel-title {
-            font-size: clamp(22px, 3.3vw, 30px);
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
+        .about-txt-col p { font-size: 0.9rem; line-height: 1.85; color: var(--ink-m); margin-bottom: 1rem; font-weight: 300; }
 
-        .card-panel-text {
-            font-size: 0.98rem;
-            line-height: 1.7;
-            max-width: 22rem;
-        }
+        .about-values { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin: 1.6rem 0 2rem; }
+        .about-val { display: flex; align-items: center; gap: 0.55rem; font-size: 0.8rem; font-weight: 500; color: var(--ink-m); }
+        .about-val::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
-        .card:nth-child(1) .card-image {
-            background: linear-gradient(135deg, rgba(102,126,234,0.45), rgba(118,75,162,0.45)), url('images/individual.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card:nth-child(2) .card-image {
-            background: linear-gradient(135deg, rgba(236,72,153,0.45), rgba(239,68,68,0.45)), url('images/group.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card:nth-child(3) .card-image {
-            background: linear-gradient(135deg, rgba(59,130,246,0.45), rgba(37,99,235,0.45)), url('images/opera.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* About Section */
-        .about {
-            display: flex;
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 3rem auto;
-            padding: 4rem 4rem;
-            align-items: center;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 30px rgba(0,0,0,0.06);
-        }
-
-        .about-image {
-            flex: 1 1 45%;
-            height: 420px;
-            border-radius: 10px;
-            background: #fff url('images/Logo1.png') center/contain no-repeat;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px;
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .about-content {
-            flex: 1 1 55%;
-            padding: 0 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .about-content h2 {
-            color: #55193b;
-            font-size: 30px;
-            margin-bottom: 1rem;
-        }
-
-        .about-content p {
-            color: #222;
-            line-height: 1.75;
-            margin-bottom: 1.25rem;
-            font-size: 1rem;
-        }
-
-        .read-more {
-            display: inline-block;
-            background: #55193b;
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 1rem;
-        }
-
-        /* collapsed content for About section */
-        .about-more { display: none; }
+        .about-more { display: none; margin-top: 1.4rem; }
         .about-more.open { display: block; }
 
-        /* Apply Guide (Three Steps) */
-        .apply-guide {
-            background: #f1f4f7;
-            padding: 4.5rem 0 5rem;
-        }
+        /* ══ PROGRAMS ══ */
+        .programs { background: var(--cream); padding: 6rem 0; }
+        .programs-inner { max-width: 1360px; margin: 0 auto; padding: 0 3rem; }
+        .sec-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3.5rem; gap: 2rem; flex-wrap: wrap; }
 
-        .apply-guide-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 4rem;
-            text-align: center;
+        .programs-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+        .prog-card {
+            background: var(--white); border-radius: 14px; padding: 1.8rem;
+            border: 1px solid rgba(26,17,24,0.07); cursor: default;
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s, border-color 0.3s;
         }
-
-        .apply-guide-title {
-            font-size: clamp(26px, 4vw, 36px);
-            color: #111827;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
+        .prog-card.vis { opacity: 1; transform: translateY(0); }
+        .prog-card:hover { transform: translateY(-6px); box-shadow: 0 8px 40px rgba(26,17,24,0.12); border-color: rgba(196,151,62,0.3); }
+        .prog-icon {
+            width: 46px; height: 46px; background: rgba(85,25,59,0.08); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+            margin-bottom: 1.1rem; transition: background 0.3s;
         }
+        .prog-card:hover .prog-icon { background: var(--maroon); }
+        .prog-icon i { color: var(--maroon); transition: color 0.3s; }
+        .prog-card:hover .prog-icon i { color: var(--white); }
+        .prog-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.45rem; }
+        .prog-desc { font-size: 0.78rem; line-height: 1.7; color: var(--ink-l); font-weight: 300; }
 
-        .apply-guide-subtitle {
-            font-size: 1rem;
-            color: #4b5563;
-            max-width: 640px;
-            margin: 0 auto;
+        /* ══ HOW TO APPLY ══ */
+        .apply-guide { background: var(--ink); padding: 7rem 0; position: relative; overflow: hidden; }
+        .apply-guide::before {
+            content: ''; position: absolute; right: -12%; top: -25%;
+            width: 640px; height: 640px; border-radius: 50%;
+            border: 1px solid rgba(196,151,62,0.07);
         }
+        .apply-inner { max-width: 1360px; margin: 0 auto; padding: 0 3rem; position: relative; z-index: 1; }
+        .apply-hdr { text-align: center; margin-bottom: 5rem; }
+        .apply-hdr .sec-eyebrow { justify-content: center; color: var(--gold-l); }
+        .apply-hdr .sec-eyebrow::before { background: var(--gold-l); }
+        .apply-hdr .sec-title { color: var(--white); }
+        .apply-hdr p { font-size: 0.88rem; color: rgba(255,255,255,0.48); max-width: 500px; margin: 0 auto; font-weight: 300; }
 
-        .apply-steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 3rem;
-            margin: 3rem 0;
-            align-items: stretch;
+        .apply-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-bottom: 4rem; position: relative; }
+        .apply-steps::before {
+            content: ''; position: absolute; top: 31px;
+            left: calc(16.66% + 1rem); right: calc(16.66% + 1rem); height: 1px;
+            background: linear-gradient(90deg, rgba(196,151,62,0.45), rgba(196,151,62,0.12) 50%, rgba(196,151,62,0.45));
         }
-
         .apply-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            flex: 1 1 260px;
+            text-align: center; padding: 2.5rem 1.8rem;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s, border-color 0.3s;
         }
-
-        .apply-step-number {
-            width: 80px;
-            height: 80px;
-            background: #e11b3d;
-            color: #ffffff;
-            font-size: 2.3rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        .apply-step.vis { opacity: 1; transform: translateY(0); }
+        .apply-step:hover { background: rgba(255,255,255,0.07); border-color: rgba(196,151,62,0.3); transform: translateY(-4px); }
+        .apply-step-num {
+            width: 62px; height: 62px; border-radius: 50%;
+            background: var(--maroon); border: 3px solid rgba(196,151,62,0.4);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 700;
+            color: var(--white); margin: 0 auto 1.4rem;
+            position: relative; z-index: 1; box-shadow: 0 0 0 6px rgba(85,25,59,0.2);
         }
+        .apply-step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 0.7rem; }
+        .apply-step p { font-size: 0.8rem; line-height: 1.75; color: rgba(255,255,255,0.45); font-weight: 300; }
+        .apply-cta-wrap { text-align: center; }
 
-        .apply-step-text {
-            text-align: left;
+        /* ══ FOOTER ══ */
+        .site-footer { background: #0d0a0c; color: #f5f5f5; padding: 5rem 0 2rem; }
+        .footer-inner { max-width: 1360px; margin: 0 auto; padding: 0 3rem; display: grid; grid-template-columns: minmax(0,2fr) repeat(3,minmax(0,1fr)); gap: 4rem; }
+        .footer-logo-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.1rem; }
+        .footer-logo-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(196,151,62,0.3); }
+        .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+        .footer-tagline { font-size: 0.78rem; line-height: 1.7; color: rgba(255,255,255,0.38); margin-bottom: 1.6rem; font-weight: 300; max-width: 270px; }
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.8rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+        .footer-contact-item i { color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+        .footer-heading { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 1.3rem; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .footer-links { list-style: none; }
+        .footer-links li + li { margin-top: 0.55rem; }
+        .footer-links a { text-decoration: none; color: rgba(255,255,255,0.48); font-size: 0.82rem; font-weight: 300; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom { max-width: 1360px; margin: 3.5rem auto 0; padding: 1.5rem 3rem 0; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.28); font-weight: 300; }
+        .footer-social { display: flex; gap: 0.55rem; }
+        .footer-social a { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.14); display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.45); font-size: 0.76rem; text-decoration: none; transition: all 0.25s; }
+        .footer-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+        /* ══ BACK TO TOP ══ */
+        .back-to-top { position: fixed; right: 2rem; bottom: 2rem; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(196,151,62,0.45); background: var(--maroon); color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1100; box-shadow: 0 6px 20px rgba(85,25,59,0.32); }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--maroon-d); transform: translateY(-2px); }
+
+        /* ══ KEYFRAMES ══ */
+        @keyframes riseIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+        /* ══ RESPONSIVE ══ */
+        @media (max-width: 1100px) {
+            .programs-grid { grid-template-columns: repeat(2,1fr); }
+            .stats-inner { grid-template-columns: repeat(2,1fr); }
         }
-
-        .apply-step-text h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.35rem;
-            color: #111827;
-        }
-
-        .apply-step-text p {
-            font-size: 0.98rem;
-            color: #4b5563;
-        }
-
-        .apply-cta {
-            display: inline-block;
-            padding: 0.9rem 2.4rem;
-            background: #e11b3d;
-            color: #ffffff;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.22);
-            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .apply-cta:hover {
-            background: #be123c;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.26);
-        }
-
-        /* animate about section when it enters view */
-        .about.in-view .about-image,
-        .about.in-view .about-content {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .about.in-view .about-content {
-            transform: translateY(0);
-        }
-
-        /* Footer */
-        .site-footer {
-            background: #171b1f;
-            color: #f5f5f5;
-            margin-top: 4rem;
-            padding: 4rem 0 2rem;
-            position: relative;
-        }
-
-        .footer-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 4rem;
-            display: grid;
-            grid-template-columns: minmax(0, 2.2fr) repeat(3, minmax(0, 1.2fr));
-            gap: 3.5rem;
-        }
-
-        .footer-heading {
-            font-size: 1rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-contact p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: #d5d5d5;
-        }
-
-        .footer-contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: #ffffff;
-        }
-
-        .footer-contact-item i {
-            color: #f6c343;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li + li {
-            margin-top: 0.55rem;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: #d5d5d5;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: #ffffff;
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 3rem auto 0;
-            padding: 1.2rem 4rem 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            font-size: 0.9rem;
-            color: #b5b5b5;
-        }
-
-        .footer-social {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-        }
-
-        .footer-social a {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.35);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-        }
-
-        .footer-social a:hover {
-            background: #f6c343;
-            color: #171b1f;
-            transform: translateY(-2px);
-        }
-
-        .back-to-top {
-            position: fixed;
-            right: 2.5rem;
-            bottom: 2.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            border: none;
-            background: #7b3a63;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.2s ease;
-            z-index: 1200;
-        }
-
-        .back-to-top i {
-            font-size: 1rem;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background: #55193b;
-        }
-
-        @media (max-width: 968px) {
-            .about { flex-direction: column; padding: 2rem; }
-            .about-image { width: 100%; height: 260px; }
-            .about-content { padding: 1rem 0 0 0; }
-        }
-
         @media (max-width: 900px) {
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
-                row-gap: 2.5rem;
-            }
+            .header-inner { padding: 0 1.5rem; }
+            .school-name h1 { font-size: 0.9rem; }
+            nav { position: fixed; inset: 80px 0 auto 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(16px); padding: 1.5rem 2rem 2rem; border-bottom: 1px solid rgba(196,151,62,0.15); transform: translateY(-110%); transition: transform 0.35s cubic-bezier(.16,1,.3,1); box-shadow: 0 10px 30px rgba(26,17,24,0.1); }
+            nav.open { transform: translateY(0); }
+            nav ul { flex-direction: column; gap: 0; }
+            nav a { padding: 0.8rem 0; font-size: 0.88rem; border-radius: 0; border-bottom: 1px solid rgba(26,17,24,0.06); }
+            .nav-cta { margin-top: 0.5rem; border-radius: 4px !important; text-align: center; }
+            .menu-toggle { display: flex; }
+            .hero-inner { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 2rem 3rem; }
+            .hero-copy { max-width: 100%; }
+            .hero-title, .hero-desc, .eyebrow { text-align: center; }
+            .hero-actions, .hero-tags { justify-content: center; }
+            .hero-desc { margin-left: auto; margin-right: auto; }
+            .hcard-row { grid-template-columns: 1fr 1fr; }
+            .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .about-img-col { max-width: 400px; margin: 0 auto; width: 100%; }
+            .about-img-frame { padding-bottom: 80%; }
+            .apply-steps { grid-template-columns: 1fr; }
+            .apply-steps::before { display: none; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
         }
-
         @media (max-width: 640px) {
-            .footer-inner {
-                padding: 0 1.75rem;
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                padding: 1.2rem 1.75rem 0;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .back-to-top {
-                right: 1.5rem;
-                bottom: 1.5rem;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                position: fixed;
-                top: 90px;
-                left: -100%;
-                width: 100%;
-                background: white;
-                padding: 2rem;
-                transition: left 0.3s ease;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .hero-title {
-                font-size: clamp(28px, 7vw, 38px);
-            }
-
-            .school-name h1 {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero-title {
-                font-size: clamp(22px, 9vw, 28px);
-            }
-
-            .hero-departments {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .department:not(:last-child)::after {
-                display: none;
-            }
+            .hero-inner { padding: 3rem 1.5rem 2.5rem; }
+            .hero-title { font-size: clamp(36px,10vw,52px); }
+            .hero-video-wrap { display: block; }
+            .hero::before { display: none; }
+            .hero-staff { display: none; }
+            .hero-title { color: var(--white); }
+            .hero-title strong { color: #e2b0cc; }
+            .eyebrow { color: var(--gold-l); }
+            .hero-desc { color: rgba(255,255,255,0.72); }
+            .tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.82); border-color: rgba(255,255,255,0.15); }
+            .hero-cards { display: block; }
+            .hcard-main { min-width: 100%; flex-shrink: 0; height: 275px; }
+            .hcard-row { display: none; }
+            .carousel-dots { display: flex; }
+            .stats-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .programs-inner, .about-inner, .apply-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .footer-inner { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.5rem; }
+            .footer-bottom { padding: 1.2rem 1.5rem 0; flex-direction: column; align-items: flex-start; }
+            .back-to-top { right: 1.25rem; bottom: 1.25rem; }
         }
     </style>
 </head>
 <body>
-    <header id="header">
-        <div class="header-container">
-            <div class="logo-section">
-                <img src="images/Logo1.png" alt="King David Music Logo" class="logo-image">
-                <div class="school-name">
-                    <h1>MINSTREL DAVID ROYAL SCHOOL OF MUSIC</h1>
-                    <p>Raising Impactful Christian Music Ministers</p>
-                </div>
+
+<!-- ═══════ HEADER ═══════ -->
+<header id="header">
+    <div class="header-inner">
+        <a class="logo-section" href="#home">
+            <img src="images/Logo1.png" alt="Minstrel David Royal School of Music" class="logo-image">
+            <div class="school-name">
+                <h1>Minstrel David Royal School of Music</h1>
+                <p>Raising Impactful Christian Music Ministers</p>
             </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#programs">PROGRAMS</a></li>
-                    <li><a href="#admissions">ADMISSIONS</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+        </a>
+        <nav id="nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="apply.html" class="nav-cta">Apply Now</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="home">
+    <div class="hero-staff" aria-hidden="true">
+        <div class="hero-staff-line" style="top:18%"></div>
+        <div class="hero-staff-line" style="top:30%"></div>
+        <div class="hero-staff-line" style="top:42%"></div>
+        <div class="hero-staff-line" style="top:54%"></div>
+        <div class="hero-staff-line" style="top:66%"></div>
+    </div>
+    <div class="hero-video-wrap">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="Vid/0210.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+    </div>
+
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <div class="eyebrow">Discover Your Musical Journey</div>
+            <h2 class="hero-title">Learn from<br><strong>Skilled</strong><br>Musicians</h2>
+            <p class="hero-desc">A purpose-driven institution shaping exceptional musicians for global stages — through discipline, creativity, and faith.</p>
+            <div class="hero-actions">
+                <a href="apply.html" class="btn-primary">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#about" class="btn-ghost">Learn More <i class="fa-solid fa-chevron-down"></i></a>
+            </div>
+            <div class="hero-tags">
+                <span class="tag">Piano</span>
+                <span class="tag">Saxophone</span>
+                <span class="tag">Drums</span>
+                <span class="tag">Guitar</span>
+                <span class="tag">Flute</span>
+                <span class="tag">Trumpet</span>
+                <span class="tag">Music Production</span>
+                <span class="tag">Theory &amp; Composition</span>
             </div>
         </div>
-    </header>
 
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-subtitle">Discover Your Musical Journey</div>
-                <h2 class="hero-title">Learn from Skilled Musicians</h2>
-                <div class="hero-departments">
-                    <span class="department">Piano</span>
-                    <span class="department">Saxophone</span>
-                    <span class="department">Drums</span>
-                    <span class="department">Guitar</span>
-                    <span class="department">Flute</span>
-                    <span class="department">Trumpet</span>
-                    <span class="department">Music Production</span>
-                    <span class="department">Music Theory & Composition</span>
+        <div class="hero-cards">
+            <div class="hero-cards-track" id="heroTrack">
+                <div class="hcard hcard-main">
+                    <div class="hcard-bg"></div>
+                    <div class="hcard-overlay">
+                        <div class="hcard-label">One-on-One</div>
+                        <div class="hcard-title">Individual Lessons</div>
+                    </div>
+                    <div class="hcard-panel">
+                        <h3>Individual Lessons</h3>
+                        <p>Personalized one-on-one instruction designed to develop technique, confidence, and musical expression at your own pace.</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="cards-grid">
-                <div class="card card-individual">
-                    <div class="card-image"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">Individual Lessons</h3>
-                    </div>
-                    <div class="card-panel">
-                        <h3 class="card-panel-title">Individual Lessons</h3>
-                        <p class="card-panel-text">Personalized one-on-one instruction designed to develop technique, confidence, and musical expression at your own pace.</p>
+            <div class="hcard-row">
+                <div class="hcard">
+                    <div class="hcard-bg"></div>
+                    <div class="hcard-overlay">
+                        <div class="hcard-label">Collaborative</div>
+                        <div class="hcard-title">Group Classes</div>
                     </div>
                 </div>
-
-                <div class="card card-group">
-                    <div class="card-image"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">Group Classes</h3>
-                    </div>
-                    <div class="card-panel">
-                        <h3 class="card-panel-title">Group Classes</h3>
-                        <p class="card-panel-text">Small group classes designed to help students learn alongside peers, improve musical coordination, and gain confidence through collaborative practice.</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">Apply Now</h3>
-                    </div>
-                </div>
+                <a href="apply.html" class="hcard hcard-apply" style="border-radius:16px;">
+                    <span>Apply Now</span>
+                    <div class="hcard-apply-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+            </div>
+            <div class="carousel-dots" id="carouselDots">
+                <button class="carousel-dot active" data-idx="0"></button>
+                <button class="carousel-dot" data-idx="1"></button>
+                <button class="carousel-dot" data-idx="2"></button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-image" aria-hidden="true"></div>
-        <div class="about-content">
-            <h2>About Us</h2>
-            <p>Minstrel David Royal School of Music is a purpose-driven, forward-thinking institution dedicated to shaping exceptional musicians who can compete and perform on global stages. Built on a foundation of disciplined training, creative exploration, and professional mentorship, the Academy provides a transformative learning experience for students at every level.</p>
+<!-- ═══════ STATS ═══════ -->
+<div class="stats-bar">
+    <div class="stats-inner" id="statsInner">
+        <div class="stat-item"><div class="stat-num">500<span>+</span></div><div class="stat-label">Students Trained</div></div>
+        <div class="stat-item"><div class="stat-num">8<span>+</span></div><div class="stat-label">Instruments Offered</div></div>
+        <div class="stat-item"><div class="stat-num">10<span>+</span></div><div class="stat-label">Years of Excellence</div></div>
+        <div class="stat-item"><div class="stat-num">15<span>+</span></div><div class="stat-label">Expert Instructors</div></div>
+    </div>
+</div>
 
-            <p>Our mandate is to discover, develop, and refine musical talent while empowering individuals to excel in performance, technique, and artistic expression. We combine classical tradition with modern performance techniques, ensuring every student becomes a well-rounded musician. Whether you are a beginner exploring your first instrument or an advanced performer preparing for competitions, we provide the structure, tools, and inspiration you need to thrive.</p>
-
-            <!-- collapsed content: will be revealed when READ MORE is clicked -->
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about" id="about">
+    <div class="about-inner">
+        <div class="about-img-col" id="aboutImg">
+            <div class="about-img-frame"></div>
+            <div class="about-badge">
+                <div class="about-badge-num">A+</div>
+                <div class="about-badge-txt">Christian Music Excellence</div>
+            </div>
+        </div>
+        <div class="about-txt-col" id="aboutTxt">
+            <div class="sec-eyebrow">Who We Are</div>
+            <h2 class="sec-title">Shaping <em>World-Class</em> Musicians</h2>
+            <p>Minstrel David Royal School of Music is a purpose-driven institution dedicated to shaping exceptional musicians who can compete and perform on global stages. Built on disciplined training, creative exploration, and professional mentorship.</p>
+            <div class="about-values">
+                <div class="about-val">Spirituality</div>
+                <div class="about-val">Discipline</div>
+                <div class="about-val">Creativity</div>
+                <div class="about-val">Excellence</div>
+                <div class="about-val">Integrity</div>
+                <div class="about-val">Passion</div>
+            </div>
+            <a href="#" id="readMoreBtn" class="btn-ghost">READ MORE <i class="fa-solid fa-chevron-down" style="font-size:0.7rem;"></i></a>
             <div class="about-more" id="aboutMore">
-                <p>The Academy integrates practical instruction, music theory, stage performance, and personal development. With modern teaching approaches, well-equipped practice studios, highly-skilled instructors, and personalized coaching for all ages and skill levels, students are positioned to grow into confident, creative, and versatile artists.</p>
-
-                <p>Our core values of Spirituality, Discipline, Creativity, Excellence, Integrity, Passion, and Continuous Growth guide our culture and reflect our unwavering commitment to raising outstanding musicians ready to perform on both classical and contemporary stages.</p>
-            </div>
-
-            <a class="read-more" href="#" id="readMoreBtn">READ MORE</a>
-        </div>
-    </section>
-
-    <!-- Apply Guide Section -->
-    <section class="apply-guide" id="admissions">
-        <div class="apply-guide-inner">
-            <h2 class="apply-guide-title">How to Apply</h2>
-            <p class="apply-guide-subtitle">Follow these three simple steps to begin your journey with Minstrel David Royal School of Music.</p>
-
-            <div class="apply-steps">
-                <div class="apply-step">
-                    <div class="apply-step-number">1</div>
-                    <div class="apply-step-text">
-                        <h3>Step 1: Submit Your Details</h3>
-                        <p>Fill out a short pre-registration form with your name, phone number, email, and preferred program.</p>
-                    </div>
-                </div>
-
-                <div class="apply-step">
-                    <div class="apply-step-number">2</div>
-                    <div class="apply-step-text">
-                        <h3>Step 2: We Contact You</h3>
-                        <p>One of our Enrollment Officers will contact you via phone, WhatsApp, or email to confirm your details, answer any questions you may have, and explain class options, schedules, and fees.</p>
-                    </div>
-                </div>
-
-                <div class="apply-step">
-                    <div class="apply-step-number">3</div>
-                    <div class="apply-step-text">
-                        <h3>Step 3: Complete Registration &amp; Payment</h3>
-                        <p>After confirmation, you can complete your registration in the way most convenient for you. Visit the school to finalize your registration and payment, or pay securely online through an official payment link sent to you.</p>
-                    </div>
-                </div>
-            </div>
-
-            <a href="apply.html" class="apply-cta">Apply Now</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="site-footer" id="contact">
-        <div class="footer-inner">
-            <div class="footer-column footer-contact">
-                <h3 class="footer-heading">Connect With Us</h3>
-                <p>Street behind Kaycee Bread Bakery, Trade Fair Road,<br>
-                Sokoto, Sokoto State, Nigeria</p>
-                <div class="footer-contact-item">
-                    <i class="fa-solid fa-phone"></i>
-                    <span>+234 81 689 5201</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>info@minstreldavidroyalmusic.com</span>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h3 class="footer-heading">Study</h3>
-                <ul class="footer-links">
-                    <li><a href="#programs">Why Study With Us?</a></li>
-                    <li><a href="#programs">Instrument Programs</a></li>
-                    <li><a href="#programs">Beginner & Advanced Levels</a></li>
-                    <li><a href="#admissions">Short Courses</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3 class="footer-heading">Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Practice Materials</a></li>
-                    <li><a href="#">FAQs</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h3 class="footer-heading">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#admissions">Admissions</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <p style="margin-top:1.2rem;">Our mandate is to discover, develop, and refine musical talent while empowering individuals to excel in performance, technique, and artistic expression. We combine classical tradition with modern performance techniques, ensuring every student becomes a well-rounded musician.</p>
+                <p>The Academy integrates practical instruction, music theory, stage performance, and personal development. With modern teaching approaches, well-equipped practice studios, and personalized coaching for all ages and skill levels, students grow into confident, creative artists ready for global stages.</p>
+                <p>Our core values of Spirituality, Discipline, Creativity, Excellence, Integrity, Passion, and Continuous Growth guide everything we do.</p>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="footer-bottom">
-            <span>&copy; 2025 Minstrel David Royal School of Music.</span>
-            <div class="footer-social" aria-label="Social media links">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="RSS feed"><i class="fa-solid fa-rss"></i></a>
+<!-- ═══════ PROGRAMS ═══════ -->
+<section class="programs" id="programs">
+    <div class="programs-inner">
+        <div class="sec-header">
+            <div>
+                <div class="sec-eyebrow">What We Teach</div>
+                <h2 class="sec-title" style="margin-bottom:0">Our <em>Programs</em></h2>
+            </div>
+            <a href="apply.html" class="btn-primary">Enrol Today <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="programs-grid" id="progGrid">
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-music"></i></div><div class="prog-name">Piano &amp; Keyboard</div><p class="prog-desc">Classical and contemporary piano technique for all skill levels, from beginner to advanced performance.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-guitar"></i></div><div class="prog-name">Guitar</div><p class="prog-desc">Acoustic and electric guitar training covering styles from worship to classical fingerpicking.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-drum"></i></div><div class="prog-name">Drums &amp; Percussion</div><p class="prog-desc">Rhythm, timing, and dynamic control for worship, jazz, and contemporary music settings.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-wind"></i></div><div class="prog-name">Saxophone &amp; Winds</div><p class="prog-desc">Alto, tenor saxophone, flute, and trumpet — breath control and tonal mastery for all levels.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-headphones"></i></div><div class="prog-name">Music Production</div><p class="prog-desc">DAW skills, mixing, and arrangement for modern Christian music production.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-book-open"></i></div><div class="prog-name">Theory &amp; Composition</div><p class="prog-desc">Music theory fundamentals, ear training, and original composition for well-rounded musicians.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-users"></i></div><div class="prog-name">Group &amp; Ensemble</div><p class="prog-desc">Collaborative classes to develop teamwork, ensemble playing, and real-world stage experience.</p></div>
+            <div class="prog-card"><div class="prog-icon"><i class="fa-solid fa-microphone"></i></div><div class="prog-name">Vocal Training</div><p class="prog-desc">Voice development, range extension, and worship-led vocal technique for every level.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ APPLY ═══════ -->
+<section class="apply-guide" id="admissions">
+    <div class="apply-inner">
+        <div class="apply-hdr">
+            <div class="sec-eyebrow">Admissions</div>
+            <h2 class="sec-title">How to <em style="color:var(--gold-l);">Apply</em></h2>
+            <p>Three simple steps to begin your musical journey with Minstrel David Royal School of Music.</p>
+        </div>
+        <div class="apply-steps" id="applySteps">
+            <div class="apply-step">
+                <div class="apply-step-num">1</div>
+                <h3>Submit Your Details</h3>
+                <p>Fill out a short pre-registration form with your name, phone number, email, and preferred program.</p>
+            </div>
+            <div class="apply-step">
+                <div class="apply-step-num">2</div>
+                <h3>We Contact You</h3>
+                <p>An Enrollment Officer will reach you via phone, WhatsApp, or email to confirm your details, answer questions, and explain class options and fees.</p>
+            </div>
+            <div class="apply-step">
+                <div class="apply-step-num">3</div>
+                <h3>Register &amp; Begin</h3>
+                <p>Complete registration in person or pay securely online through an official payment link sent directly to you.</p>
             </div>
         </div>
+        <div class="apply-cta-wrap">
+            <a href="apply.html" class="btn-primary" style="padding:1rem 2.5rem; font-size:0.85rem;">Start Your Application <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
 
-        <button class="back-to-top" id="backToTop" aria-label="Back to top">
-            <i class="fa-solid fa-chevron-up"></i>
-        </button>
-    </footer>
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="site-footer" id="contact">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-logo-row">
+                <img src="images/Logo1.png" alt="Logo" class="footer-logo-img">
+                <div class="footer-brand-name">Minstrel David Royal<br>School of Music</div>
+            </div>
+            <p class="footer-tagline">Raising Impactful Christian Music Ministers — disciplined, creative, and Spirit-led.</p>
+            <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Street behind Kaycee Bread Bakery, Trade Fair Road, Sokoto, Nigeria</span></div>
+            <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+234 81 689 5201</span></div>
+            <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>info@minstreldavidroyalmusic.com</span></div>
+        </div>
+        <div>
+            <h3 class="footer-heading">Study</h3>
+            <ul class="footer-links">
+                <li><a href="#programs">Why Study With Us?</a></li>
+                <li><a href="#programs">Instrument Programs</a></li>
+                <li><a href="#programs">Beginner &amp; Advanced</a></li>
+                <li><a href="#admissions">Short Courses</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="footer-heading">Resources</h3>
+            <ul class="footer-links">
+                <li><a href="#">Practice Materials</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Student Portal</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="apply.html">Apply Now</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2025 Minstrel David Royal School of Music. All rights reserved.</span>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
 
-    <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('nav');
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
 
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
+<script>
+(function(){
+    'use strict';
+
+    /* Header */
+    const header = document.getElementById('header');
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+
+    menuToggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        menuToggle.classList.toggle('open', open);
+    });
+
+    nav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', e => {
+            const href = a.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const target = href === '#home' ? document.documentElement : document.querySelector(href);
+                if (target) { e.preventDefault(); nav.classList.remove('open'); menuToggle.classList.remove('open'); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+            } else { nav.classList.remove('open'); menuToggle.classList.remove('open'); }
         });
+    });
 
-        // Header scroll effect
-        const header = document.getElementById('header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+    /* Back to top */
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 400));
+    btt.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    /* About read more */
+    const readBtn = document.getElementById('readMoreBtn');
+    const moreDiv = document.getElementById('aboutMore');
+    if (readBtn && moreDiv) {
+        readBtn.addEventListener('click', e => {
+            e.preventDefault();
+            const open = moreDiv.classList.toggle('open');
+            readBtn.innerHTML = open
+                ? 'READ LESS <i class="fa-solid fa-chevron-up" style="font-size:0.7rem;"></i>'
+                : 'READ MORE <i class="fa-solid fa-chevron-down" style="font-size:0.7rem;"></i>';
+            if (open) moreDiv.scrollIntoView({ behavior:'smooth', block:'nearest' });
         });
+    }
 
-        // Card hover effects
-        const cards = document.querySelectorAll('.card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
+    /* Scroll reveal */
+    const toReveal = [];
+    function scheduleReveal(selector, delay) {
+        document.querySelectorAll(selector).forEach((el, i) => {
+            if (delay) el.style.transitionDelay = (i * delay) + 's';
+            toReveal.push(el);
         });
+    }
+    scheduleReveal('#statsInner .stat-item', 0.1);
+    scheduleReveal('#aboutImg', 0);
+    scheduleReveal('#aboutTxt', 0);
+    scheduleReveal('#progGrid .prog-card', 0.07);
+    scheduleReveal('#applySteps .apply-step', 0.12);
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                // handle only in-page anchors (starting with #)
-                if (href && href.startsWith('#')) {
-                    const target = href === '#home' ? document.documentElement : document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        nav.classList.remove('active');
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-                // non-anchor links will follow their default behavior
+    const revObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); revObs.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    toReveal.forEach(el => revObs.observe(el));
+
+    /* Hero parallax */
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => { if (hero) hero.style.setProperty('--hp', (window.scrollY * -0.12)+'px'); }, { passive:true });
+
+    /* Mobile carousel */
+    (function(){
+        const mq = window.matchMedia('(max-width: 640px)');
+        const track = document.getElementById('heroTrack');
+        const dots  = document.querySelectorAll('.carousel-dot');
+        if (!track || !dots.length) return;
+
+        const slideData = [
+            { label:'One-on-One', title:'Individual Lessons', bg:'linear-gradient(160deg,rgba(85,25,59,.62) 0%,rgba(20,10,20,.72) 100%),url(images/individual.jpg)' },
+            { label:'Collaborative', title:'Group Classes',   bg:'linear-gradient(160deg,rgba(45,27,78,.68) 0%,rgba(20,10,20,.78) 100%),url(images/group.jpg)' },
+            { label:'Join Us',     title:'Apply Now',          bg:'linear-gradient(160deg,rgba(60,10,30,.72) 0%,rgba(196,151,62,.2) 100%),url(images/opera.jpg)' }
+        ];
+
+        let idx = 0, timer = null, built = false;
+
+        function build() {
+            if (built) return; built = true;
+            slideData.slice(1).forEach(s => {
+                const c = document.createElement('div');
+                c.className = 'hcard hcard-main';
+                c.style.cssText = 'min-width:100%;flex-shrink:0;height:275px;';
+                c.innerHTML = `<div class="hcard-bg" style="background-image:${s.bg};background-color:#1a1118;background-size:cover;background-position:center;"></div><div class="hcard-overlay"><div class="hcard-label">${s.label}</div><div class="hcard-title">${s.title}</div></div>`;
+                track.appendChild(c);
             });
+        }
+
+        function goTo(i) {
+            idx = i;
+            track.style.cssText = `display:flex;overflow:hidden;transform:translateX(${-i*100}%);transition:transform .45s cubic-bezier(.16,1,.3,1);`;
+            dots.forEach((d,j) => d.classList.toggle('active', j===i));
+        }
+
+        function next() { goTo((idx+1)%3); }
+        function start() { if(!timer) timer = setInterval(next, 3500); }
+        function stop()  { clearInterval(timer); timer = null; }
+
+        dots.forEach((d,i) => d.addEventListener('click', () => { goTo(i); stop(); start(); }));
+
+        function handleMQ(e) {
+            if (e.matches) { build(); goTo(0); start(); }
+            else { stop(); track.style.transform=''; track.style.transition=''; }
+        }
+
+        if (mq.addEventListener) mq.addEventListener('change', handleMQ);
+        else mq.addListener(handleMQ);
+        handleMQ(mq);
+
+        /* Swipe */
+        let sx = 0;
+        track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; stop(); }, { passive:true });
+        track.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - sx;
+            if (Math.abs(dx) > 48) goTo(dx<0 ? Math.min(idx+1,2) : Math.max(idx-1,0));
+            start();
         });
-
-        // About section: toggle extra content
-        (function(){
-            const btn = document.getElementById('readMoreBtn');
-            const more = document.getElementById('aboutMore');
-            if (!btn || !more) return;
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                const open = more.classList.toggle('open');
-                btn.textContent = open ? 'READ LESS' : 'READ MORE';
-                if (open) {
-                    // optional: scroll to the revealed content smoothly
-                    more.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    // scroll back to the about heading
-                    document.querySelector('#about .about-content h2').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-        })();
-
-        // Back to top button
-        (function(){
-            const backToTop = document.getElementById('backToTop');
-            if (!backToTop) return;
-
-            window.addEventListener('scroll', function(){
-                if (window.scrollY > 300) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            });
-
-            backToTop.addEventListener('click', function(){
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-
-        // Hero fade-in and parallax
-        (function(){
-            const hero = document.querySelector('.hero');
-            if (!hero) return;
-
-            // Fade-in + upward motion using IntersectionObserver
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            hero.classList.add('in-view');
-                            obs.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.25 });
-
-                observer.observe(hero);
-            } else {
-                // Fallback: animate on load
-                hero.classList.add('in-view');
-            }
-
-            // Subtle parallax on hero background layer
-            const updateParallax = () => {
-                const scrollY = window.scrollY || window.pageYOffset;
-                const offset = scrollY * -0.15; // subtle upward movement
-                hero.style.setProperty('--hero-parallax', offset + 'px');
-            };
-
-            updateParallax();
-            window.addEventListener('scroll', updateParallax);
-        })();
-
-        // About section animation: text fade-in upward, image slide-in
-        (function(){
-            const about = document.querySelector('.about');
-            if (!about) return;
-
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            about.classList.add('in-view');
-                            obs.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.2 });
-
-                observer.observe(about);
-            } else {
-                about.classList.add('in-view');
-            }
-        })();
-    </script>
+    })();
+})();
+</script>
 </body>
 </html>
