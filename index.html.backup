@@ -94,9 +94,9 @@
         .hero-staff-line { position: absolute; left: 0; right: 0; height: 1px; background: var(--maroon); }
 
         /* Video bg */
-        .hero-video-wrap { position: absolute; inset: 0; z-index: 0; display: none; pointer-events: none; }
+        .hero-video-wrap { position: absolute; inset: 0; z-index: 0; display: none; }
         .hero-video { width: 100%; height: 100%; object-fit: cover; }
-        .hero-video-overlay { position: absolute; inset: 0; background: rgba(26,17,24,0.58); pointer-events: none; }
+        .hero-video-overlay { position: absolute; inset: 0; background: rgba(26,17,24,0.58); }
 
         .hero-inner {
             position: relative; z-index: 1;
@@ -133,7 +133,6 @@
         .hero-actions {
             display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap;
             opacity: 0; animation: riseIn 0.8s cubic-bezier(.16,1,.3,1) forwards 0.65s;
-            position: relative; z-index: 3;
         }
 
         .btn-primary {
@@ -188,11 +187,6 @@
             background-color: #2d1434;
             background-image: linear-gradient(160deg, rgba(85,25,59,0.62) 0%, rgba(20,10,20,0.72) 100%), url('images/individual.jpg');
         }
-        /* Collaborative card background when cards are inside the hero track */
-        .hero-cards-track .hcard:nth-child(2) .hcard-bg {
-            background-color: #1e1432;
-            background-image: linear-gradient(160deg, rgba(45,27,78,0.68) 0%, rgba(20,10,20,0.78) 100%), url('images/group.jpg');
-        }
         .hcard-row .hcard:nth-child(1) .hcard-bg {
             background-color: #1e1432;
             background-image: linear-gradient(160deg, rgba(45,27,78,0.68) 0%, rgba(20,10,20,0.78) 100%), url('images/group.jpg');
@@ -216,9 +210,8 @@
         .hcard-panel p { font-size: 0.86rem; line-height: 1.75; color: rgba(255,255,255,0.68); }
 
         .hcard-apply {
-            background-image: linear-gradient(160deg, rgba(60,10,30,0.72) 0%, rgba(196,151,62,0.2) 100%), url('images/opera.jpg');
-            background-size: cover; background-position: center; color: var(--white);
-            display: flex; align-items: center; justify-content: space-between; padding: 1.5rem;
+            background: var(--maroon); display: flex; align-items: center;
+            justify-content: space-between; padding: 1.5rem;
             transition: background 0.25s, transform 0.25s; text-decoration: none;
         }
         .hcard-apply:hover { background: var(--maroon-d); transform: scale(1.01); }
@@ -233,11 +226,7 @@
         .hcard-apply:hover .hcard-apply-icon { background: rgba(255,255,255,0.15); }
 
         /* Mobile carousel */
-        .hero-cards-track {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
+        .hero-cards-track { display: flex; overflow: hidden; }
         .carousel-dots { display: none; justify-content: center; gap: 8px; margin-top: 1.4rem; }
         .carousel-dot { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: rgba(85,25,59,0.2); cursor: pointer; transition: all 0.3s; }
         .carousel-dot.active { background: var(--maroon); transform: scale(1.35); }
@@ -415,7 +404,7 @@
         @media (max-width: 900px) {
             .header-inner { padding: 0 1.5rem; }
             .school-name h1 { font-size: 0.9rem; }
-            nav { position: fixed; inset: 80px 0 auto 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(16px); padding: 1.5rem 2rem 2rem; border-bottom: 1px solid rgba(196,151,62,0.15); transform: translateY(-200%); transition: transform 0.35s cubic-bezier(.16,1,.3,1); box-shadow: 0 10px 30px rgba(26,17,24,0.1); }
+            nav { position: fixed; inset: 80px 0 auto 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(16px); padding: 1.5rem 2rem 2rem; border-bottom: 1px solid rgba(196,151,62,0.15); transform: translateY(-110%); transition: transform 0.35s cubic-bezier(.16,1,.3,1); box-shadow: 0 10px 30px rgba(26,17,24,0.1); }
             nav.open { transform: translateY(0); }
             nav ul { flex-direction: column; gap: 0; }
             nav a { padding: 0.8rem 0; font-size: 0.88rem; border-radius: 0; border-bottom: 1px solid rgba(26,17,24,0.06); }
@@ -445,23 +434,8 @@
             .eyebrow { color: var(--gold-l); }
             .hero-desc { color: rgba(255,255,255,0.72); }
             .tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.82); border-color: rgba(255,255,255,0.15); }
-
-            /* Desktop-first layout switches to carousel on small screens */
-            .hero-cards { width: 100%; overflow: hidden; }
-
-            .hero-cards-track {
-                display: flex;
-                width: 100%;
-                transition: transform 0.6s ease;
-                gap: 0;
-            }
-
-            .hero-cards-track .hcard {
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-
-            .hcard-main { height: 275px; }
+            .hero-cards { display: block; }
+            .hcard-main { min-width: 100%; flex-shrink: 0; height: 275px; }
             .hcard-row { display: none; }
             .carousel-dots { display: flex; }
             .stats-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
@@ -524,6 +498,7 @@
             <p class="hero-desc">A purpose-driven institution shaping exceptional musicians for global stages — through discipline, creativity, and faith.</p>
             <div class="hero-actions">
                 <a href="apply.html" class="btn-primary">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#about" class="btn-ghost">Learn More <i class="fa-solid fa-chevron-down"></i></a>
             </div>
             <div class="hero-tags">
                 <span class="tag">Piano</span>
@@ -550,6 +525,8 @@
                         <p>Personalized one-on-one instruction designed to develop technique, confidence, and musical expression at your own pace.</p>
                     </div>
                 </div>
+            </div>
+            <div class="hcard-row">
                 <div class="hcard">
                     <div class="hcard-bg"></div>
                     <div class="hcard-overlay">
@@ -574,7 +551,7 @@
 <!-- ═══════ STATS ═══════ -->
 <div class="stats-bar">
     <div class="stats-inner" id="statsInner">
-        <div class="stat-item"><div class="stat-num">20<span>+</span></div><div class="stat-label">Students Trained</div></div>
+        <div class="stat-item"><div class="stat-num">500<span>+</span></div><div class="stat-label">Students Trained</div></div>
         <div class="stat-item"><div class="stat-num">8<span>+</span></div><div class="stat-label">Instruments Offered</div></div>
         <div class="stat-item"><div class="stat-num">10<span>+</span></div><div class="stat-label">Years of Excellence</div></div>
         <div class="stat-item"><div class="stat-num">15<span>+</span></div><div class="stat-label">Expert Instructors</div></div>
@@ -731,16 +708,7 @@
     const menuToggle = document.getElementById('menuToggle');
     const nav = document.getElementById('nav');
 
-    window.addEventListener('scroll', () => {
-        const y = window.scrollY || window.pageYOffset || 0;
-        const fadeEnd = 220; // px over which the header fades out
-        const t = Math.min(Math.max(y / fadeEnd, 0), 1);
-        const opacity = 1 - t;
-
-        header.classList.toggle('scrolled', y > 60);
-        header.style.opacity = opacity.toString();
-        header.style.pointerEvents = opacity < 0.05 ? 'none' : 'auto';
-    });
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
 
     menuToggle.addEventListener('click', () => {
         const open = nav.classList.toggle('open');
@@ -752,17 +720,8 @@
             const href = a.getAttribute('href');
             if (href && href.startsWith('#')) {
                 const target = href === '#home' ? document.documentElement : document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    nav.classList.remove('open'); menuToggle.classList.remove('open');
-                    const headerHeight = header ? header.offsetHeight : 80;
-                    const targetTop = target === document.documentElement ? 0 : (target.getBoundingClientRect().top + window.scrollY);
-                    const scrollTo = Math.max(0, targetTop - headerHeight - 12);
-                    window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-                }
-            } else {
-                nav.classList.remove('open'); menuToggle.classList.remove('open');
-            }
+                if (target) { e.preventDefault(); nav.classList.remove('open'); menuToggle.classList.remove('open'); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+            } else { nav.classList.remove('open'); menuToggle.classList.remove('open'); }
         });
     });
 
@@ -808,38 +767,61 @@
     const hero = document.querySelector('.hero');
     window.addEventListener('scroll', () => { if (hero) hero.style.setProperty('--hp', (window.scrollY * -0.12)+'px'); }, { passive:true });
 
-    /* Mobile-only carousel (desktop uses grid) */
+    /* Mobile carousel */
     (function(){
+        const mq = window.matchMedia('(max-width: 640px)');
         const track = document.getElementById('heroTrack');
-        const cards = track ? track.querySelectorAll('.hcard') : [];
-        let index = 0;
-        let interval = null;
+        const dots  = document.querySelectorAll('.carousel-dot');
+        if (!track || !dots.length) return;
 
-        function startCarousel() {
-            if (!track || !cards.length) return;
-            if (window.innerWidth > 640) return;
-            stopCarousel();
-            interval = setInterval(() => {
-                index = (index + 1) % cards.length;
-                track.style.transform = `translateX(-${index * 100}%)`;
-                track.style.transition = 'transform 0.6s ease';
-            }, 3500);
+        const slideData = [
+            { label:'One-on-One', title:'Individual Lessons', bg:'linear-gradient(160deg,rgba(85,25,59,.62) 0%,rgba(20,10,20,.72) 100%),url(images/individual.jpg)' },
+            { label:'Collaborative', title:'Group Classes',   bg:'linear-gradient(160deg,rgba(45,27,78,.68) 0%,rgba(20,10,20,.78) 100%),url(images/group.jpg)' },
+            { label:'Join Us',     title:'Apply Now',          bg:'linear-gradient(160deg,rgba(60,10,30,.72) 0%,rgba(196,151,62,.2) 100%),url(images/opera.jpg)' }
+        ];
+
+        let idx = 0, timer = null, built = false;
+
+        function build() {
+            if (built) return; built = true;
+            slideData.slice(1).forEach(s => {
+                const c = document.createElement('div');
+                c.className = 'hcard hcard-main';
+                c.style.cssText = 'min-width:100%;flex-shrink:0;height:275px;';
+                c.innerHTML = `<div class="hcard-bg" style="background-image:${s.bg};background-color:#1a1118;background-size:cover;background-position:center;"></div><div class="hcard-overlay"><div class="hcard-label">${s.label}</div><div class="hcard-title">${s.title}</div></div>`;
+                track.appendChild(c);
+            });
         }
 
-        function stopCarousel() {
-            if (interval) clearInterval(interval);
-            interval = null;
-            if (track) {
-                track.style.transform = 'translateX(0)';
-                track.style.transition = '';
-            }
-            index = 0;
+        function goTo(i) {
+            idx = i;
+            track.style.cssText = `display:flex;overflow:hidden;transform:translateX(${-i*100}%);transition:transform .45s cubic-bezier(.16,1,.3,1);`;
+            dots.forEach((d,j) => d.classList.toggle('active', j===i));
         }
 
-        startCarousel();
+        function next() { goTo((idx+1)%3); }
+        function start() { if(!timer) timer = setInterval(next, 3500); }
+        function stop()  { clearInterval(timer); timer = null; }
 
-        window.addEventListener('resize', () => { stopCarousel(); startCarousel(); });
-        window.addEventListener('orientationchange', () => { stopCarousel(); setTimeout(startCarousel, 300); });
+        dots.forEach((d,i) => d.addEventListener('click', () => { goTo(i); stop(); start(); }));
+
+        function handleMQ(e) {
+            if (e.matches) { build(); goTo(0); start(); }
+            else { stop(); track.style.transform=''; track.style.transition=''; }
+        }
+
+        if (mq.addEventListener) mq.addEventListener('change', handleMQ);
+        else mq.addListener(handleMQ);
+        handleMQ(mq);
+
+        /* Swipe */
+        let sx = 0;
+        track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; stop(); }, { passive:true });
+        track.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - sx;
+            if (Math.abs(dx) > 48) goTo(dx<0 ? Math.min(idx+1,2) : Math.max(idx-1,0));
+            start();
+        });
     })();
 })();
 </script>
