@@ -586,24 +586,37 @@
         const successModalBtn = document.getElementById('successModalBtn');
 
         if (form && loadingOverlay && successModal) {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
-                // Show loading overlay
                 loadingOverlay.classList.add('active');
 
-                // Simulate processing time (1.5 seconds)
-                setTimeout(() => {
-                    // Hide loading
-                    loadingOverlay.classList.remove('active');
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
 
-                    // Show success modal
+                try {
+                    const response = await fetch('http://localhost:3000/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to submit form');
+                    }
+
+                    loadingOverlay.classList.remove('active');
                     successModal.classList.add('active');
 
-                    // Reset form
                     form.reset();
                     updateVisibility();
-                }, 1500);
+                } catch (err) {
+                    loadingOverlay.classList.remove('active');
+                    alert('Something went wrong. Please try again.');
+                    console.error(err);
+                }
             });
 
             // Close modal on Done button click and redirect
